@@ -1,0 +1,395 @@
+﻿@model HomeViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+<style>
+    
+    :root {
+        --white: #fff;
+        --blue: #4b84fe;
+        --colorDark: #1b253d;
+        --colorLight: #99a0b0;
+        --bgDark: #ede8f0;
+        --bg: #f5f5fa;
+        --red: #fa5b67;
+        --yellow: #ffbb09;
+    }
+
+   
+    * {
+        box-sizing: border-box;
+    }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+        background: var(--bg);
+        color: var(--colorLight);
+        font-family: Open Sans, Helvetica, sans-serif;
+        font-size: 16px;
+        line-height: 120%;
+        overflow: hidden;
+    }
+
+    
+    .content-wrap {
+        padding: 3em;
+        overflow-y: auto; 
+        max-height: calc(100vh - 6em); 
+    }
+
+  
+    .content-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+        .content-head h1 {
+            font-size: 1.375em;
+            color: var(--colorDark);
+            font-weight: 500;
+            margin: 0;
+        }
+
+    .action button {
+        border: 0;
+        background: var(--blue);
+        color: var(--white);
+        padding: 0 2.25em;
+        border-radius: 3.5em;
+        height: 3.5em;
+        font-size: 1em;
+        text-transform: uppercase;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+    }
+
+        .action button:hover {
+            background-color: darken(var(--blue), 10%);
+        }
+
+        .action button:active {
+            background-color: darken(var(--blue), 20%);
+        }
+
+
+    .info-boxes {
+        padding: 3em 0 2em;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-gap: 2em;
+    }
+
+    .info-box {
+        background: var(--white);
+        height: 160px;
+        display: flex;
+        align-items: center;
+        padding: 0 3em;
+        border: 1px solid var(--bgDark);
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+        .info-box .box-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 48px;
+            height: 48px;
+        }
+
+            .info-box .box-icon svg {
+                width: 42px; 
+                height: 42px; 
+                fill: var(--colorLight);
+                transition: fill 0.3s ease;
+            }
+
+        .info-box .box-content {
+            padding-left: 1.25em;
+        }
+
+            .info-box .box-content .big {
+                font-size: 2em;
+                color: var(--colorDark);
+                display: block;
+                line-height: 150%;
+            }
+
+        .info-box.active {
+            background: var(--blue);
+            color: var(--white);
+        }
+
+            .info-box.active .box-icon svg {
+                fill: var(--white);
+            }
+
+        
+        .info-box:hover {
+            transform: translateY(-5px);
+        }
+
+            .info-box:hover .box-icon svg {
+                fill: var(--blue);
+            }
+
+            .info-box:hover .box-content .big {
+                color: var(--blue);
+            }
+
+ 
+    .box-bio {
+        margin-top: 2em;
+    }
+
+    .bio-name {
+        font-size: 1.25em;
+        color: var(--colorDark);
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .bio-position {
+        font-size: 1em;
+        color: var(--colorLight);
+    }
+
+ 
+    .box-actions {
+        margin-top: 1.5em;
+    }
+
+        .box-actions button {
+            margin-right: 1em;
+        }
+
+    .person-boxes {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+        gap: 1.5rem;
+        width: 100%;
+        padding: 2em;
+    }
+
+  
+    .person-box {
+        background-color: var(--white);
+        padding: 20px;
+        border-radius: 8px;
+        width: 100%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+      
+        .person-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+
+    .box-bio {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+
+    .icon-container svg {
+        width: 35px;
+        height: 35px;
+        fill: var(--blue);
+        transition: fill 0.3s ease;
+    }
+
+
+    .person-box:hover .icon-container svg {
+        fill: var(--yellow);
+    }
+
+    .bio-name {
+        font-size: 1.5em;
+        font-weight: 600;
+        color: var(--colorDark);
+        margin: 0;
+    }
+
+    .bio-position {
+        font-size: 1.1em;
+        color: var(--colorLight);
+    }
+
+
+    button {
+        background-color: var(--blue);
+        color: var(--white);
+        border: none;
+        padding: 12px 20px;
+        margin-top: 12px;
+        cursor: pointer;
+        border-radius: 5px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+        button:hover {
+            background-color: darken(var(--blue), 10%);
+        }
+
+        
+        button svg {
+            width: 18px;
+            height: 18px;
+        }
+
+ 
+    .person-box h2 {
+        margin-bottom: 0.5em;
+    }
+
+    .box-bio p {
+        font-size: 1em;
+        color: var(--colorLight);
+    }
+
+</style>
+<main class="content-wrap">
+    <header class="content-head">
+        <h1>Statistics</h1>
+    </header>
+
+    <div class="content">
+        <section class="info-boxes">
+            <div class="info-box">
+                <div class="box-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3,21c0,0.553,0.448,1,1,1h16c0.553,0,1-0.447,1-1v-1c0-3.714-2.261-6.907-5.478-8.281C16.729,10.709,17.5,9.193,17.5,7.5 C17.5,4.468,15.032,2,12,2C8.967,2,6.5,4.468,6.5,7.5c0,1.693,0.771,3.209,1.978,4.219C5.261,13.093,3,16.287,3,20V21z M8.5,7.5 C8.5,5.57,10.07,4,12,4s3.5,1.57,3.5,3.5S13.93,11,12,11S8.5,9.43,8.5,7.5z M12,13c3.859,0,7,3.141,7,7H5C5,16.141,8.14,13,12,13z" /></svg>
+                </div>
+
+                <div class="box-content">
+                    <span class="big">@Model.TotalEmployees</span>
+                    Nombre  des Employees
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="box-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M21 20V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1zm-2-1H5V5h14v14z" /><path d="M10.381 12.309l3.172 1.586a1 1 0 0 0 1.305-.38l3-5-1.715-1.029-2.523 4.206-3.172-1.586a1.002 1.002 0 0 0-1.305.38l-3 5 1.715 1.029 2.523-4.206z" /></svg>
+
+                </div>
+
+                <div class="box-content">
+                    <span class="big">@Model.AverageSalary.ToString("N2")</span>
+
+                    Salaire Moyen
+                </div>
+            </div>
+
+            <div class="info-box ">
+                <div class="box-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 10H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V11a1 1 0 0 0-1-1zm-1 10H5v-8h14v8zM5 6h14v2H5zM7 2h10v2H7z" /></svg>
+
+                </div>
+
+                <div class="box-content">
+                    <span class="big">@Model.TotalDepartments</span>
+                    Nombre de Departements
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="box-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M13.5 8H4m0-2v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1h-5.032a1 1 0 0 1-.768-.36l-1.9-2.28a1 1 0 0 0-.768-.36H5a1 1 0 0 0-1 1Z" />
+                    </svg>
+
+                </div>
+
+                <div class="box-content">
+                    <span class="big">@Model.TotalTasks</span>
+                    Nombre de Taches 
+                </div>
+            </div>
+        </section>
+
+        <section class="person-boxes">
+            <div class="person-box">
+                <!-- Bio Section -->
+                <div class="box-bio">
+                    <div class="icon-container">
+                    </div>
+                    <h2 class="bio-name">EMPLOYES</h2>
+                </div>
+
+                <!-- Actions Section -->
+                <a href="@Url.Action("Index", "Employe")">
+                    <button>
+                        <div style="display: flex; align-items: center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M18 18H6V6h7V4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8h-2v7z" />
+                                <path d="M17.465 5.121l-6.172 6.172 1.414 1.414 6.172-6.172 2.12 2.121L21 3h-5.657z" />
+                            </svg>
+                            <p class="bio-position" style="margin-left: 8px; color: white">Gerer</p>
+                        </div>
+                    </button>
+                </a>
+            </div>
+
+            <div class="person-box">
+                <!-- Bio Section -->
+                <div class="box-bio">
+                    <div class="icon-container">
+                    </div>
+                    <h2 class="bio-name">DEPARTEMENTS</h2>
+                </div>
+
+                <!-- Actions Section -->
+                <a href="@Url.Action("Index", "Departement")">
+                    <button>
+                        <div style="display: flex; align-items: center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M18 18H6V6h7V4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8h-2v7z" />
+                                <path d="M17.465 5.121l-6.172 6.172 1.414 1.414 6.172-6.172 2.12 2.121L21 3h-5.657z" />
+                            </svg>
+                            <p class="bio-position" style="margin-left: 8px; color: white">Gerer</p>
+                        </div>
+                    </button>
+                </a>
+            </div>
+
+            <!-- Bio Section -->
+            <div class="person-box">
+                <div class="box-bio">
+                    <div class="icon-container">
+                    </div>
+                    <h2 class="bio-name">TACHES</h2>
+                </div>
+
+                <!-- Actions Section -->
+                <a href="@Url.Action("Index", "Tache")">
+                    <button>
+                        <div style="display: flex; align-items: center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M18 18H6V6h7V4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8h-2v7z" />
+                                <path d="M17.465 5.121l-6.172 6.172 1.414 1.414 6.172-6.172 2.12 2.121L21 3h-5.657z" />
+                            </svg>
+                            <p class="bio-position" style="margin-left: 8px; color: white">Gerer</p>
+                        </div>
+                    </button>
+                </a>
+            </div>
+        </section>
+
+
+
+
+    </div>
+</main>

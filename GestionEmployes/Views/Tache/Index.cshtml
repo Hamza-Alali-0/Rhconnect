@@ -1,0 +1,201 @@
+﻿@model IEnumerable<GestionEmployes.Models.Tache>
+
+@{
+    ViewData["Title"] = "Liste des tâches";
+}
+
+<h1 class="text-center text-blue-600 text-3xl font-bold my-6">Liste des tâches</h1>
+
+<a asp-action="Create" class="create-new-btn">Ajouter une tâche</a>
+
+<section class="person-boxes">
+    @foreach (var tache in Model)
+    {
+        <div class="person-box">
+            <div class="box-bio">
+                <h2 class="bio-name">
+                    <a href="javascript:void(0);" class="text-blue-600 hover:underline" onclick="toggleDetails(@tache.TacheId)">
+                        @tache.NomTache
+                    </a>
+                </h2>
+                <br>
+
+                <div id="details-@tache.TacheId" class="hidden mt-2">
+                    <p><strong>Description:</strong> @tache.Description</p>
+                    <p><strong>DateDebut:</strong> @tache.DateDebut</p>
+                    <p><strong>DateFin:</strong> @tache.DateFin</p>
+                    <p><strong>Statut:</strong> @tache.Statut</p>
+
+                    <p>
+                        <strong>Employé Assigné:</strong><br>
+                        <a href="javascript:void(0);" class="text-blue-600 hover:underline"
+                           onclick="toggleEmployeeDetails(@tache.TacheId, @tache.Employe?.EmployeId, '@tache.Employe?.NomEmploye')">
+                            @tache.Employe?.NomEmploye
+                        </a>
+                    </p>
+                    <div id="employee-details-@tache.TacheId-@tache.Employe?.EmployeId" class="hidden mt-2">
+                        @if (tache.Employe != null)
+                        {
+                            <div class="employee-info">
+                                <img src="Images/@tache.Employe.UserImage" alt="@tache.Employe.NomEmploye" class="employee-image" />
+                                <p class="employee-name"><strong>@tache.Employe.NomEmploye</strong></p>
+                            </div>
+                            <p><strong>Salaire:</strong> @tache.Employe.Salaire DH</p>
+                            <p><strong>Date d'Embauche:</strong> @tache.Employe.DateEmbauche.ToString("dd-MM-yyyy")</p>
+                        }
+                        else
+                        {
+                            <p>Employé non assigné.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-actions">
+                <a asp-action="Edit" asp-route-id="@tache.TacheId" class="action-link">
+                    <svg class="w-6 h-6 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="stroke-blue-500" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
+                    </svg>
+                    <span>Edit</span>
+                </a>
+                <a asp-action="Delete" asp-route-id="@tache.TacheId" class="action-link">
+                    <svg class="w-6 h-6 text-red-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                    </svg>
+                    <span>Delete</span>
+                </a>
+                <a asp-action="Details" asp-route-id="@tache.TacheId" class="action-link">
+                    <svg class="w-6 h-6 text-green-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-3 5h3m-6 0h.01M12 16h3m-6 0h.01M10 3v4h4V3h-4Z" />
+                    </svg>
+                    <span>Details</span>
+                </a>
+            </div>
+        </div>
+    }
+</section>
+
+<script>
+    function toggleDetails(tacheId) {
+        const details = document.getElementById('details-' + tacheId);
+        details.classList.toggle('hidden');
+    }
+
+    function toggleEmployeeDetails(tacheId, employeId, employeeName) {
+      
+        const employeeDetails = document.getElementById('employee-details-' + tacheId + '-' + employeId);
+
+       
+        if (employeeDetails) {
+            
+            employeeDetails.classList.toggle('hidden');
+
+            
+            const employeeNameElement = employeeDetails.querySelector('.employee-name');
+            if (employeeNameElement) {
+                employeeNameElement.textContent = employeeName;
+            }
+        }
+    }
+</script>
+
+<style>
+    body {
+        background-color: #f5f5fa;
+        font-family: Open Sans, Helvetica, sans-serif;
+    }
+
+    h1 {
+        color: #1b253d;
+        font-size: 2em;
+        font-weight: 700;
+    }
+
+    .create-new-btn {
+        padding: 0.5rem 1rem;
+        color: #3b82f6;
+        font-weight: 700;
+        text-decoration: none;
+        display: inline-block;
+        transition: color 0.3s ease, background-color 0.3s ease;
+    }
+
+        .create-new-btn:hover {
+            color: white;
+            background-color: #3b82f6;
+        }
+
+    .person-boxes {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-gap: 2em;
+        padding: 2em 0;
+    }
+
+    .person-box {
+        background: #fff;
+        text-align: center;
+        padding: 2em;
+        border: 1px solid #ede8f0;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .box-bio {
+        margin: 2em 0;
+    }
+
+    .bio-name {
+        color: #1b253d;
+        font-size: 1.2em;
+        font-weight: 700;
+    }
+
+    .box-actions {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .action-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #99a0b0;
+        transition: color 0.3s ease;
+    }
+
+        .action-link:hover {
+            color: #1b253d;
+        }
+
+        .action-link span {
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+    .employee-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .employee-image {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .employee-name {
+        font-size: 1.1rem;
+        color: #1b253d;
+        font-weight: 700;
+    }
+</style>

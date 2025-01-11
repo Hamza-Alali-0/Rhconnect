@@ -1,0 +1,53 @@
+﻿@model GestionEmployes.Models.Tache
+
+@{
+    ViewData["Title"] = "Détails de la Tâche";
+}
+
+<h1 class="text-3xl font-bold text-center text-blue-600 my-6">Détails de la Tâche</h1>
+
+<div class="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <h4 class="text-xl font-semibold text-blue-600">Informations de la tâche</h4>
+    <hr class="my-4" />
+
+    <dl class="space-y-4 text-lg">
+        <div class="flex justify-between">
+            <dt class="font-medium text-gray-700">Nom de la Tâche</dt>
+            <dd class="text-gray-900">@Model.NomTache</dd>
+        </div>
+
+        <div class="flex justify-between">
+            <dt class="font-medium text-gray-700">Description</dt>
+            <dd class="text-gray-900">@Model.Description </dd>
+        </div>
+
+        <div class="flex justify-between">
+            <dt class="font-medium text-gray-700">Date de début</dt>
+            <dd class="text-gray-900">@Model.DateDebut.ToString("dd-MM-yyyy")</dd>
+        </div>
+
+        <div class="flex justify-between">
+            <dt class="font-medium text-gray-700">Date de fin</dt>
+            <dd class="text-gray-900">@Model.DateFin.ToString("dd-MM-yyyy")</dd>
+        </div>
+
+        <div class="flex justify-between">
+            <dt class="font-medium text-gray-700">Statut</dt>
+            <dd class="text-gray-900">@Model.Statut</dd>
+        </div>
+
+        <div class="flex justify-between">
+            <dt class="font-medium text-gray-700">Priorité</dt>
+            <dd class="text-gray-900">@Model.Priorite</dd>
+        </div>
+
+        <div class="flex justify-between">
+            <dt class="font-medium text-gray-700">Employé</dt>
+            <dd class="text-gray-900">@Model.Employe?.NomEmploye </dd>
+        </div>
+    </dl>
+</div>
+
+<div class="mt-6 text-center">
+    <a asp-action="Index" class="text-blue-700 hover:underline text-lg">Retour à la liste</a>
+</div>

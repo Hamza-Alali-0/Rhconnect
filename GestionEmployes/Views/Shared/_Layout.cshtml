@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HRConnect</title>
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+   
+    <!-- Styles -->
+    <link rel="stylesheet" href="~/GestionEmployes.styles.css" asp-append-version="true" />
+</head>
+<body class="bg-gray-100 h-screen">
+
+   
+    <div class="flex flex-col h-full">
+
+        <div class="flex flex-1">
+            <!-- Sidebar -->
+            <aside class="w-64 bg-white text-black flex flex-col">
+                <div class="p-4 border-b border-gray-300 flex items-center">
+                    <!-- Logo -->
+                    <img src="~/images/Gestion.jpg" alt="GestionEmployes" class="w-8 h-8 mr-2 rounded-full">
+                    <h1 class="text-2xl font-bold text-blue-600">RH<span class="ml-2 text-black">Connect</span></h1>
+                </div>
+                <br>
+                <nav class="flex-1 p-4">
+                    <ul>
+                        <!-- Section DECOUVRIR  -->
+                        <li class="py-2 text-blue-600 font-bold">
+                            <span class="ml-2">DASHBOARD</span>
+                        </li>
+
+                        <!-- Lien Home  -->
+                        <li class="py-2">
+                            <a href="@Url.Action("Index", "Home")" class="flex items-center px-3 py-2 rounded-lg hover:bg-blue-700 hover:text-white">
+                                <span class="material-icons text-black">home</span>
+                                <span class="ml-2 text-black">Home</span>
+                            </a>
+                        </li>
+                        <!-- Lien Taches  -->
+                        <a href="@Url.Action("Index", "Tache")" class="flex items-center px-3 py-2 rounded-lg hover:bg-blue-700 hover:text-white">
+                            <span class="material-icons text-black">task</span>
+                            <span class="ml-2 text-black">Taches</span>
+                        </a>
+
+                        <!-- Lien Employees  -->
+                        <li class="py-2">
+                            <a href="@Url.Action("Index", "Employe")" class="flex items-center px-3 py-2 rounded-lg hover:bg-blue-700 hover:text-white">
+                                <span class="material-icons text-black">group</span>
+                                <span class="ml-2 text-black">Employees</span>
+                            </a>
+                        </li>
+
+                        <!-- Lien Departments  -->
+                        <li class="py-2">
+                            <a href="@Url.Action("Index", "Departement")" class="flex items-center px-3 py-2 rounded-lg hover:bg-blue-700 hover:text-white">
+                                <span class="material-icons text-black">business</span>
+                                <span class="ml-2 text-black">Departments</span>
+                            </a>
+                        </li>
+                        <br>
+                        <!--  Section TOOLS -->
+                        <li class="py-2 text-blue-600 font-bold">
+                            <span class="ml-2">TOOLS</span>
+                        </li>
+
+                        <!-- Lien  Chercher  -->
+                        <li class="py-2">
+                            <a href="#" class="flex items-center px-3 py-2 rounded-lg hover:bg-blue-700 hover:text-white">
+                                <span class="material-icons text-black">search</span>
+                                <span class="ml-2 text-black">Chercher</span>
+                            </a>
+                        </li>
+
+                        <!-- Lien Privacy  -->
+                    
+                        <li class="py-2">
+                            <a asp-controller="Home" asp-action="Privacy" class="flex items-center px-3 py-2 rounded-lg hover:bg-blue-700 hover:text-white">
+                                <span class="material-icons text-black">privacy_tip</span>
+                                <span class="ml-2 text-black">Privacy</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="flex-1">
+                <header class="bg-white border-b shadow-sm p-3">
+                    <nav class="container mx-auto flex justify-between items-center">
+                        <!--  Section Search Bar -->
+                        <div class="relative w-full max-w-4xl">
+                            <input type="text" class="form-input px-4 py-2 w-full rounded-lg border-gray-300 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search...">
+                            <span class="material-icons absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                                search
+                            </span>
+                        </div>
+                    </nav>
+                </header>
+                <main class="container mx-auto p-6">
+                    <div role="main" class="pb-3">
+                        @RenderBody()
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <footer class="bg-gray-100 border-t p-4 text-center text-gray-600 mt-auto">
+            &copy; 2024 - RH Connect -
+            <a class="text-blue-700 hover:underline" href="@Url.Action("Privacy", "Home")">Privacy</a>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+    <!-- Library Icons  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</body>
+</html>

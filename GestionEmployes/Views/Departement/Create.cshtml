@@ -1,0 +1,33 @@
+﻿@model GestionEmployes.Models.Departement
+
+<h1 class="text-3xl font-bold text-center text-blue-600 my-6">Créer un Département</h1>
+
+<div class="flex justify-center">
+    <div class="w-full sm:w-96 bg-white shadow-lg rounded-lg p-6">
+        <form asp-action="Create">
+            
+            <div asp-validation-summary="ModelOnly" class="text-red-500 mb-4"></div>
+
+            <!-- Nom Department  -->
+            <div class="form-group mb-4">
+                <label asp-for="NomDepartement" class="block text-lg font-semibold text-gray-700">Nom du Département</label>
+                <input asp-for="NomDepartement" class="form-control w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mt-1" />
+                <span asp-validation-for="NomDepartement" class="text-red-500 text-sm"></span>
+            </div>
+
+            
+            <div class="form-group text-center">
+                <input type="submit" value="Créer" class="bg-blue-600 text-white px-6 py-2 rounded-md w-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a asp-action="Index" class="text-blue-600 hover:text-blue-800">Retour à la liste</a>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<GestionEmployes.Models.Departement>
+
+<h1 class="text-3xl font-bold text-center text-blue-600 my-6">Départements</h1>
+
+<div class="flex flex-wrap gap-6 justify-center">
+    @foreach (var department in Model)
+    {
+        <div class="info-box bg-white shadow-lg rounded-lg p-6 w-full sm:w-72">
+            <div class="box-content text-center">
+                <span class="big font-bold text-xl text-blue-600">@department.NomDepartement</span>
+            </div>
+
+            <div class="text-center mt-4">
+                <a asp-action="Delete" asp-route-id="@department.DepartmentID" class="flex items-center text-red-600 hover:text-red-800 font-medium text-sm space-x-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                    </svg>
+                    <span>Supprimer</span>
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="text-center mt-6">
+    <a asp-action="Create" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        Créer un nouveau département
+    </a>
+</div>

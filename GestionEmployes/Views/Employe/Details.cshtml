@@ -1,0 +1,60 @@
+﻿@model GestionEmployes.Models.Employe
+
+@{
+    ViewData["Title"] = "Détails";
+}
+
+<h1 class="text-3xl font-bold text-center text-blue-600 my-6">Détails de l'employé</h1>
+
+<!-- Image Section -->
+<div class="text-center mb-6">
+    @if (Model.UserImage != null)
+    {
+        <img src="~/Images/@Model.UserImage" class="rounded-full w-32 h-32 mx-auto" alt="Image de l'employé" />
+    }
+    else
+    {
+        <span class="italic text-gray-500">Aucune image disponible</span>
+    }
+</div>
+
+<div class="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <h4 class="text-xl font-semibold text-blue-600">Informations de l'employé</h4>
+    <hr class="my-4" />
+
+    <dl class="space-y-4 text-lg">
+        <div class="flex justify-between">
+            <dt class="font-medium text-gray-700">Nom</dt>
+            <dd class="text-gray-900">@Model.NomEmploye</dd>
+        </div>
+
+        <div class="flex justify-between">
+            <dt class="font-medium text-gray-700">Date de naissance</dt>
+            <dd class="text-gray-900">@Model.DateNaissance.ToString("dd-MM-yyyy")</dd>
+        </div>
+
+        <div class="flex justify-between">
+            <dt class="font-medium text-gray-700">Salaire</dt>
+            <dd class="text-gray-900">@Model.Salaire</dd>
+        </div>
+
+        <div class="flex justify-between">
+            <dt class="font-medium text-gray-700">Date d'embauche</dt>
+            <dd class="text-gray-900">@Model.DateEmbauche.ToString("dd-MM-yyyy")</dd>
+        </div>
+
+        <div class="flex justify-between">
+            <dt class="font-medium text-gray-700">ID National</dt>
+            <dd class="text-gray-900">@Model.NationalId</dd>
+        </div>
+
+        <div class="flex justify-between">
+            <dt class="font-medium text-gray-700">Département</dt>
+            <dd class="text-gray-900">@Model.Departement?.NomDepartement</dd>
+        </div>
+    </dl>
+</div>
+
+<div class="mt-6 text-center">
+    <a asp-action="Index" class="text-blue-700 hover:underline text-lg">Retour à la liste</a>
+</div>

@@ -1,0 +1,82 @@
+﻿@model GestionEmployes.Models.Employe
+
+@{
+    ViewData["Title"] = "Créer un employé";
+}
+
+<h1 class="text-3xl font-bold text-center text-blue-600 my-6">Créer un employé</h1>
+
+<h4 class="text-xl font-semibold text-center text-blue-600">Détails de l'employé</h4>
+<hr class="my-4" />
+
+<div class="max-w-4xl mx-auto bg-white p-6 shadow-lg rounded-lg">
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+        <!-- Name field -->
+        <div class="form-group mb-4">
+            <label asp-for="NomEmploye" class="block text-gray-700 font-medium">Nom</label>
+            <input asp-for="NomEmploye" class="form-input w-full border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <span asp-validation-for="NomEmploye" class="text-danger text-sm"></span>
+        </div>
+
+        <!-- Image upload -->
+        <div class="form-group mb-4">
+            <label asp-for="UserImage" class="block text-gray-700 font-medium">Image de l'employé</label>
+            <input type="file" asp-for="UserImage" class="form-input w-full border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <span asp-validation-for="UserImage" class="text-danger text-sm"></span>
+        </div>
+
+        <!-- Date of birth field -->
+        <div class="form-group mb-4">
+            <label asp-for="DateNaissance" class="block text-gray-700 font-medium">Date de naissance</label>
+            <input asp-for="DateNaissance" class="form-input w-full border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" type="date" />
+            <span asp-validation-for="DateNaissance" class="text-danger text-sm"></span>
+        </div>
+
+        <!-- Salary field -->
+        <div class="form-group mb-4">
+            <label asp-for="Salaire" class="block text-gray-700 font-medium">Salaire</label>
+            <input asp-for="Salaire" class="form-input w-full border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <span asp-validation-for="Salaire" class="text-danger text-sm"></span>
+        </div>
+
+        <!-- Hiring date field -->
+        <div class="form-group mb-4">
+            <label asp-for="DateEmbauche" class="block text-gray-700 font-medium">Date d'embauche</label>
+            <input asp-for="DateEmbauche" class="form-input w-full border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" type="date" />
+            <span asp-validation-for="DateEmbauche" class="text-danger text-sm"></span>
+        </div>
+
+        <!-- National ID field -->
+        <div class="form-group mb-4">
+            <label asp-for="NationalId" class="block text-gray-700 font-medium">ID National</label>
+            <input asp-for="NationalId" class="form-input w-full border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <span asp-validation-for="NationalId" class="text-danger text-sm"></span>
+        </div>
+
+        <!-- Department dropdown -->
+        <div class="form-group mb-4">
+            <label asp-for="DepartementId" class="block text-gray-700 font-medium">Département</label>
+            <select asp-for="DepartementId" class="form-input w-full border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" asp-items="ViewBag.Departements">
+                <option value="">Sélectionner un département</option>
+            </select>
+            <span asp-validation-for="DepartementId" class="text-danger text-sm"></span>
+        </div>
+
+        <!-- Submit button -->
+        <div class="form-group mt-6 flex justify-between">
+            <button type="submit" class="btn bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 focus:outline-none">Créer</button>
+            <a asp-action="Index" class="btn bg-gray-500 text-white py-2 px-6 rounded-md hover:bg-gray-600 focus:outline-none">Annuler</a>
+        </div>
+    </form>
+</div>
+
+<div class="text-center mt-4">
+    <a asp-action="Index" class="text-blue-600 hover:underline">Retour à la liste</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
