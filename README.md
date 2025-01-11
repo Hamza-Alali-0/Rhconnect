@@ -77,7 +77,7 @@ Here are some screenshots of the project:
 
 | ![Home Page][home-screenshot] | ![Admin Page][admin-screenshot] | ![Login Page][login-screenshot] |
 |-------------------------------|----------------------------------|----------------------------------|
-| **Home Page**                 | **Admin Page**                  | **Login Page**                  |
+| **Details Page**                 | **Employes Page**                  | **Tasks Page**                  |
 
 <!-- Reference-style links for images -->
 [home-screenshot]: Assets/details.png
